@@ -5,6 +5,8 @@
 ### 1.效果图
 ![w-scale](https://img2018.cnblogs.com/blog/1102129/201904/1102129-20190408163916312-632601654.png)
 
+[微信开发者工具查看效果](https://developers.weixin.qq.com/s/cQKbTtmV717E)
+
 ### 2.使用
 在需要引用的json页面添加
 ```
@@ -103,7 +105,6 @@ style选项
 |`fontColor`| #404040|刻度数字颜色|
 |`fontSize `|16|字体大小|
 
-[查看完整代码](git@github.com:mydickk/w-scale.git)
 
 如果我的代码对你帮助，请给分start吧。^-^
 
