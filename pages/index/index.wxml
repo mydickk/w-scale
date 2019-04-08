@@ -1,0 +1,31 @@
+<!--pages/index/index.wxml-->
+<view class='container'>
+  <view class='scale-title'>你的体重</view>
+  <view class='scale-value'>{{weight}}kg</view> 
+  <scale min="30" 
+    max="200" 
+    int="{{false}}" 
+    single="10" 
+    h="60" 
+    active="{{weight}}" 
+    styles="{{styles}}" 
+    id="weight"
+    bindvalue="bindvalue"></scale>
+  
+  <view class='scale-title'>你的身高</view>
+  <view class='scale-container'>
+    <view class='scale-value'>{{height}}cm</view> 
+    <view class='scale-view'>
+      <scale min="80" 
+        max="230" 
+        int="{{false}}"
+        single="10" 
+        h="40" 
+        active="{{height}}" 
+        styles="{{styles}}" 
+        direction="vertical"
+        id="height"
+        bindvalue="bindvalue"></scale>
+    </view>
+  </view>
+</view>

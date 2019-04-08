@@ -1,0 +1,114 @@
+<!--
+min [number] 默认值 0, // 最小值
+max[number] 默认值 100, // 最大值
+int[boolean] 默认值 true, // 是否开启整数模式 ，false为小数模式  整数模式 step最小单位是 1 ，小数模式，step的最小单位是 0.1
+single[number] 默认值 10, // 单个格子的实际长度（单位px）
+h[number] 默认值 0,// 自定义高度 初始值为80
+active [null] 默认值 center ，// 自定义选中位置  （三个值 min, max ,center , 范围内合法数值）
+styles [object]  // 自定义卡尺颜色  注意： 仅支持 #dbdbdb  或者red  这种 颜色 不支持简写 如 #333
+默认值： {
+  line: '#dbdbdb',   // 刻度颜色
+  bginner: '#fbfbfb',  // 前景色颜色
+  bgoutside: '#dbdbdb',  // 背景色颜色
+  lineSelect: '#52b8f5',  // 选中线颜色
+  fontColor: '#404040',   // 刻度数字颜色
+  fontSize:16
+}
+  -->
+<!-- 横向 -->
+<view class='wrapper horizontal-box' id='scale-wrapper' style='background:{{styles.bgoutside}}' wx:if="{{direction=='horizontal'}}">
+  <view class='scale-mask' wx:if="{{!scroll}}"></view>
+  <view class='zz' style='background-color:{{styles.lineSelect}}'></view>
+  <scroll-view 
+    class='scroll-view' 
+    scroll-x="true" 
+    scroll-left="{{centerNum}}" 
+    scroll-with-animation='{{true}}' 
+    catchscroll="bindscroll">
+    
+    <view class='scroll-wrapper'>
+      <!-- 左补白 -->
+      <view class='seat' style='width:{{windowWidth/2}}px;'></view>
+
+      <!-- 标尺容器 -->
+      <view  class='scale-container'>
+        <view class='scale-wrapper'>
+            <view class='scale-grip'
+              wx:for="{{grid}}"
+              wx:key="{{index}}"
+              style='height:{{h}}px;border-color:{{styles.line}};'>
+              <view class='scale-grip-item' 
+              wx:for-item="it"
+              wx:for-index="idx"
+              wx:for="{{10}}" 
+              wx:key="{{idx}}"
+              style="width:{{single}}px;height:{{idx==4?'80':'60'}}%;border-color:{{styles.line}};"
+              >
+            </view>
+          </view>
+        </view>
+        <!-- 标尺数显示，长度：每格长度*个数 -->
+        <view class='scale-vaule-wrapper' 
+          style='width:{{single*10*grid}}px;color:{{styles.fontColor}};font-size:{{styles.fontSize}}px;'>
+          <view class='scale-value first-scale-value' style='width:{{single*10}}px'>{{min}}</view>
+          <view class='scale-vaule' 
+          wx:for="{{grid}}" 
+          wx:key="{{index}}" 
+          style='width:{{single*10}}px'>{{min+10*(index+1)}}</view>
+        </view>
+      </view>
+
+      <!-- 右补白 -->
+      <view class='seat' style='width:{{windowWidth/2}}px;'></view>
+    </view>
+  </scroll-view>
+</view>
+
+<!-- 竖向 -->
+<view class='wrapper vertical-box' id='scale-wrapper' style='background:{{styles.bgoutside}}' wx:else="{{direction=='vertical'}}">
+  <view class='scale-mask' wx:if="{{!scroll}}"></view>
+  <view class='zz' style='background-color:{{styles.lineSelect}}'></view>
+  <scroll-view 
+    class='scroll-view' 
+    scroll-y="true" 
+    scroll-top="{{centerNum}}" 
+    scroll-with-animation='{{true}}'
+    catchscroll="bindscroll">
+    
+    <view class='scroll-wrapper'>
+      <!-- 左补白 -->
+      <view class='seat' style='height:{{windowHeight/2-single*10/2}}px;'></view>
+
+      <!-- 标尺容器 -->
+      <view  class='scale-container'>
+        <view class='scale-wrapper' style='height:{{single*10*grid}}px;padding-top:{{single*10/2}}px'>
+          <view class='scale-grip'
+              wx:for="{{grid}}"
+              wx:key="{{index}}"
+              style='border-color:{{styles.line}};'>
+              <view class='scale-grip-item' 
+              wx:for-item="it"
+              wx:for-index="idx"
+              wx:for="{{10}}" 
+              wx:key="{{idx}}"
+              style="height:{{single}}px;width:{{idx==4||idx==9?'80':'60'}}%;border-color:{{styles.line}};"
+              >
+              </view>
+          </view>
+        </view>
+        <!-- 标尺数显示，长度：每格长度*个数 -->
+        <view class='scale-vaule-wrapper' 
+          style='height:{{single*10*(grid+1)}}px;color:{{styles.fontColor}};font-size:{{styles.fontSize}}px;'>
+          <view class='scale-value' style='height:{{single*10}}px;line-height:{{single*10}}px;'>{{min}}</view>
+          <view class='scale-vaule' 
+          wx:for="{{grid}}" 
+          wx:key="{{index}}" 
+          style='height:{{single*10}}px;line-height:{{single*10}}px;'>{{min+10*(index+1)}}</view>
+        </view>
+      </view>
+
+      <!-- 右补白 -->
+      <view class='seat' style='height:{{windowHeight/2-single*10/2}}px;'></view>
+    </view>
+  </scroll-view>
+</view>

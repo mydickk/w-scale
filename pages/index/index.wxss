@@ -1,0 +1,23 @@
+/* pages/index/index.wxss */
+.container {
+  padding: 0 40rpx;
+}
+.scale-value{
+  text-align: center;
+  color: #6643e7;
+}
+.scale-title{
+  margin-top: 50rpx;
+}
+.scale-container{
+  display: flex;
+}
+.scale-container .scale-value{
+  flex: 1;
+  line-height: 600rpx;
+}
+.scale-view{
+  width: 500rpx;
+  height: 600rpx;
+  flex: 1;
+}
